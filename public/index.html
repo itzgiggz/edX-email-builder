@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edX Email Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="builder-container">
+        <!-- Main left column for controls -->
+        <div class="main-column">
+            <div id="module-list-container">
+                <h2>Available Modules</h2>
+                <div id="module-list">
+                    <div class="module-item" draggable="true" data-module-name="Hero-Image-Text-Button.html"><h3>Hero</h3><p>Large hero with image, text, and a CTA button.</p></div>
+                    <div class="module-item" draggable="true" data-module-name="Content-Image-Swap.html"><h3>Image Swap</h3><p>Shows different images on desktop vs. mobile.</p></div>
+                    <div class="module-item" draggable="true" data-module-name="Product-2-Column-Cards.html"><h3>2-Column Product Cards</h3><p>Side-by-side product cards with buttons.</p></div>
+                    <div class="module-item" draggable="true" data-module-name="Product-2-Column-Cards-No-Button.html"><h3>2-Column Product Cards (No Button)</h3><p>Side-by-side product cards without buttons.</p></div>
+                    <div class="module-item" draggable="true" data-module-name="Product-4-Column-Grid.html"><h3>4-Column Product Grid</h3><p>A 2x2 grid of smaller product cards.</p></div>
+                    <div class="module-item" draggable="true" data-module-name="Content-Image-Text-Button.html"><h3>Content Block</h3><p>A standard content block with image, text, and button.</p></div>
+                    <div class="module-item" draggable="true" data-module-name="Product-2-Column-Stacked-Cards.html"><h3>2-Column Stacking Cards</h3><p>Product cards that stack vertically on mobile.</p></div>
+                    <div class="module-item" draggable="true" data-module-name="Feature-Blog-Overlap.html"><h3>Feature Blog Overlap</h3><p>Blog post with an overlapping text box.</p></div>
+                </div>
+            </div>
+            <div id="drop-zone-wrapper">
+                <h2>Email Canvas</h2>
+                <p>Drag modules here to build your email.</p>
+                <div id="drop-zone"><!-- Dropped modules will appear here --></div>
+            </div>
+            
+            <!-- ::: THIS IS THE UPDATED PART ::: -->
+            <div class="build-controls">
+                <button id="build-btn">Build Preview</button>
+                <button id="generate-btn" disabled>Generate HTML File</button>
+            </div>
+            <div id="loading-indicator" class="hidden">Building...</div>
+        </div>
+
+        <!-- Dedicated right column for the preview -->
+        <div class="preview-column">
+            <div class="preview-header">
+                <h2>Live Preview</h2>
+                <div class="view-controls">
+                    <button id="desktop-btn" class="view-toggle-btn">Desktop</button>
+                    <button id="mobile-btn" class="view-toggle-btn">Mobile</button>
+                </div>
+            </div>
+            <div id="preview-wrapper">
+                <iframe id="preview-frame" srcdoc="<p>Build your email to see the preview.</p>"></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
