@@ -3,54 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edX Email Builder</title>
+    <title>MDB | Strategic Consulting</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500&family=Source+Serif+Pro:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="builder-container">
-        <!-- Main left column for controls -->
-        <div class="main-column">
-            <div id="module-list-container">
-                <h2>Available Modules</h2>
-                <div id="module-list">
-                    <div class="module-item" draggable="true" data-module-name="Hero-Image-Text-Button.html"><h3>Hero</h3><p>Large hero with image, text, and a CTA button.</p></div>
-                    <div class="module-item" draggable="true" data-module-name="Content-Image-Swap.html"><h3>Image Swap</h3><p>Shows different images on desktop vs. mobile.</p></div>
-                    <div class="module-item" draggable="true" data-module-name="Product-2-Column-Cards.html"><h3>2-Column Product Cards</h3><p>Side-by-side product cards with buttons.</p></div>
-                    <div class="module-item" draggable="true" data-module-name="Product-2-Column-Cards-No-Button.html"><h3>2-Column Product Cards (No Button)</h3><p>Side-by-side product cards without buttons.</p></div>
-                    <div class="module-item" draggable="true" data-module-name="Product-4-Column-Grid.html"><h3>4-Column Product Grid</h3><p>A 2x2 grid of smaller product cards.</p></div>
-                    <div class="module-item" draggable="true" data-module-name="Content-Image-Text-Button.html"><h3>Content Block</h3><p>A standard content block with image, text, and button.</p></div>
-                    <div class="module-item" draggable="true" data-module-name="Product-2-Column-Stacked-Cards.html"><h3>2-Column Stacking Cards</h3><p>Product cards that stack vertically on mobile.</p></div>
-                    <div class="module-item" draggable="true" data-module-name="Feature-Blog-Overlap.html"><h3>Feature Blog Overlap</h3><p>Blog post with an overlapping text box.</p></div>
-                </div>
-            </div>
-            <div id="drop-zone-wrapper">
-                <h2>Email Canvas</h2>
-                <p>Drag modules here to build your email.</p>
-                <div id="drop-zone"><!-- Dropped modules will appear here --></div>
-            </div>
-            
-            <!-- ::: THIS IS THE UPDATED PART ::: -->
-            <div class="build-controls">
-                <button id="build-btn">Build Preview</button>
-                <button id="generate-btn" disabled>Generate HTML File</button>
-            </div>
-            <div id="loading-indicator" class="hidden">Building...</div>
-        </div>
 
-        <!-- Dedicated right column for the preview -->
-        <div class="preview-column">
-            <div class="preview-header">
-                <h2>Live Preview</h2>
-                <div class="view-controls">
-                    <button id="desktop-btn" class="view-toggle-btn">Desktop</button>
-                    <button id="mobile-btn" class="view-toggle-btn">Mobile</button>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="#home" class="logo-link"><img src="images/mdb-logo-text.png" alt="MDB Consulting Logo" class="logo-image"></a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#partners" class="nav-link">Partners</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Section 1: Hero (Corrected for Layering) -->
+<section id="home" class="hero">
+    
+    <!-- Video Background: Lowest Layer (z-index: 1) -->
+    <video class="hero-video" autoplay loop muted playsinline poster="https://i.imgur.com/J3o5h65.jpg">
+        <source src="https://cdn.prod.website-files.com/63161cbbab6ed969fd5f8ef4/631621fc369f8a165f5fa877_MDB_Website_Hero_1080-transcode.webm" type="video/webm">
+        <source src="https://cdn.prod.website-files.com/63161cbbab6ed969fd5f8ef4/631621fc369f8a165f5fa877_MDB_Website_Hero_1080-transcode.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <!-- Dark Overlay: Middle Layer (z-index: 2) -->
+    <div class="hero-overlay"></div>
+    
+    <!-- Text Content: Top Layer (z-index: 3) -->
+    <div class="hero-content">
+        <h1 class="hero-headline">We Solve Big, Hairy Problems.</h1>
+        <p class="hero-subheadline">MDB isn’t a traditional agency. We are Paula and Anthony—two seasoned experts and strategic partners who plug into your organization to provide executive-level guidance. We draw the map that empowers your teams to build the future.</p>
+        <a href="#contact" class="cta-button">Let’s Solve Your Next Big Challenge</a>
+    </div>
+
+</section>
+
+        <!-- Section 2: Our Strategic Counsel -->
+        <section id="services" class="services-section content-section">
+            <h2 class="section-headline">Your Unfair Advantage is Our Expertise.</h2>
+            <p class="section-intro">Your teams are brilliant, but they’re stuck in the weeds. We provide the 10,000-foot view. We plug in as your senior strategic partners to untangle complex challenges, identify unseen opportunities, and future-proof your brand. Here’s how we help:</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+                    </div>
+                    <h3>Growth & Retention Strategy</h3>
+                    <p>Stop guessing what customers want. We dive deep into your data and customer journey to build actionable strategies that don’t just acquire users, but create fanatically loyal advocates. We deliver the blueprint for sustainable growth.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c.251.023.501.05.75.082m.75.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591l3.659 3.66M12 12.75h.008v.008H12v-.008z" /></svg>
+                    </div>
+                    <h3>Experience Design & Innovation</h3>
+                    <p>A great product isn’t enough. We architect seamless, memorable customer experiences across digital and physical touchpoints. From creative direction to technical innovation, we help you design the "wow" moments that differentiate you.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                    </div>
+                    <h3>Future-Proofing with AI & Automation</h3>
+                    <p>The landscape is shifting. We are your guides to navigating what’s next. We specialize in demystifying and integrating AI and automation not just for efficiency, but to create smarter systems and build a lasting competitive edge.</p>
                 </div>
             </div>
-            <div id="preview-wrapper">
-                <iframe id="preview-frame" srcdoc="<p>Build your email to see the preview.</p>"></iframe>
+        </section>
+
+        <!-- Section 3: About Us -->
+        <section id="about" class="about-section content-section">
+            <div class="about-content">
+                <h2 class="section-headline">Two Experts. Decades of Wins.</h2>
+                <h3>Meet Paula & Anthony.</h3>
+                <p>We’ve worked with the largest brands in the world. We’ve also run an agency that did the same at a very high level. Now, we’ve distilled that experience into what we do best: creative problem-solving.</p>
+                <p>We’re not here to replace your agency or build out a massive team. We are senior-level reinforcements—a strategist and a creative technologist who have mastered multiple skillsets. We parachute in, diagnose the core issue, and provide the clarity and strategic direction your team needs to execute with confidence. Think of us as your in-house senior consultants, without the long-term overhead.</p>
             </div>
+        </section>
+
+        <!-- Section 4: Our Partners -->
+        <section id="partners" class="partners-section content-section">
+            <h2 class="section-headline">Trusted by the Best in the Jungle.</h2>
+            <p class="section-intro">We've had the privilege of providing strategic guidance to some of the world's most recognized and innovative companies.</p>
+            <!-- Swiper -->
+            <div class="swiper logo-slider">
+                <div class="swiper-wrapper">
+                    <!-- Placeholder Logos. Best to use SVG or transparent PNGs of the same height -->
+                    <div class="swiper-slide"><img src="https://logo.clearbit.com/hbo.com" alt="HBO logo"></div>
+                    <div class="swiper-slide"><img src="https://logo.clearbit.com/discovery.com" alt="Discovery logo"></div>
+                    <div class="swiper-slide"><img src="https://logo.clearbit.com/warnerbros.com" alt="Warner Bros logo"></div>
+                    <div class="swiper-slide"><img src="https://logo.clearbit.com/aetv.com" alt="A&E logo"></div>
+                    <div class="swiper-slide"><img src="https://logo.clearbit.com/foodnetwork.com" alt="Food Network logo"></div>
+                    <div class="swiper-slide"><img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft logo"></div>
+                    <div class="swiper-slide"><img src="https://logo.clearbit.com/amazon.com" alt="Amazon logo"></div>
+                    <div class="swiper-slide"><img src="https://logo.clearbit.com/netflix.com" alt="Netflix logo"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Testimonials -->
+        <section id="testimonials" class="testimonial-section content-section">
+            <h2 class="section-headline">What Our Partners Say.</h2>
+            <p class="section-intro">Don’t just take our word for it. Here’s how we’ve helped our partners evolve.</p>
+             <!-- Swiper -->
+            <div class="swiper testimonial-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"Paula and Anthony didn’t just give us a solution; they changed how we approach problems. Their strategic insight was a game-changer that empowered our entire marketing division."</p>
+                            <p class="testimonial-author">[Name/Title], [Company]</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"We were completely stuck on a complex user experience challenge. MDB came in, quickly diagnosed the core issues, and delivered a creative and technical roadmap that was both brilliant and, most importantly, actionable for our internal teams."</p>
+                            <p class="testimonial-author">[Name/Title], [Company]</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"Navigating AI felt overwhelming. MDB demystified it for us, identifying three key areas for integration that have already given us a significant competitive advantage. They are essential partners for any brand serious about the future."</p>
+                            <p class="testimonial-author">[Name/Title], [Company]</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Section 6: Contact -->
+    <footer id="contact" class="footer-section">
+        <h2 class="section-headline">Let’s Solve Your Next Challenge.</h2>
+        <p>Ready to bring in senior strategic firepower? We’d love to hear about the problem you’re trying to solve. Reach out directly and let’s determine if we’re the right fit to help you move forward.</p>
+        <div class="contact-info">
+            <a href="mailto:paula.and.anthony@monkeydobetter.com">paula.and.anthony@monkeydobetter.com</a>
+            <span> • </span>
+            <a href="tel:+1234567890">[Your Phone Number]</a>
         </div>
-    </div>
+        <p class="footer-note">No forms, no friction. Just a direct line to us.</p>
+    </footer>
+
+    <!-- Swiper.js -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Custom JS -->
     <script src="script.js"></script>
+
 </body>
 </html>

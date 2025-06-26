@@ -1,67 +1,491 @@
-/* --- Main Layout Structure --- */
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: #f8f9fa; color: #333; overflow: hidden; }
-.builder-container { display: flex; height: 100vh; }
-.main-column { width: 400px; flex-shrink: 0; padding: 20px; background-color: #ffffff; border-right: 2px solid #e9ecef; display: flex; flex-direction: column; overflow-y: auto; }
-.preview-column { flex-grow: 1; padding: 20px; display: flex; flex-direction: column; background-color: #e9ecef; }
+/*
+    style.css
+    MDB Consulting Single-Page Website
+    ---
+    Table of Contents:
+    1. :root Variables
+    2. Global Styles & Resets
+    3. Header & Navigation
+    4. Section-Specific Styles
+        - Hero Section
+        - Content Sections (General)
+        - Services Section
+        - About Section
+        - Partners Section (Logo Slider)
+        - Testimonials Section
+        - Footer (Contact Section)
+    5. Swiper.js Customizations
+    6. Responsive Media Queries
+*/
 
-/* --- Control Column Sections --- */
-#module-list-container { height: 45%; display: flex; flex-direction: column; margin-bottom: 20px; }
-#module-list { flex-grow: 1; overflow-y: auto; padding-right: 10px; }
-#drop-zone-wrapper { height: 45%; display: flex; flex-direction: column; }
-#drop-zone { flex-grow: 1; padding: 10px; border: 2px dashed #007bff; border-radius: 8px; background-color: #f0f5ff; transition: background-color 0.2s ease, border-color 0.2s ease; overflow-y: auto; }
+/* 1. :root Variables */
+:root {
+    --primary-color: #ffc107; /* Bright Yellow/Gold */
+    --secondary-color: #00a878; /* Jungle Green */
+    --dark-color: #222c2a; /* Dark Charcoal (for text) */
+    --bg-light: #f7f7f7; /* Off-white background */
+    --bg-dark: #2a363b; /* Darker background for contrast */
+    --white-color: #ffffff;
+    
+    --font-heading: 'Source Serif Pro', serif;
+--font-body: 'Source Sans Pro', sans-serif;
 
-/* --- Module and Drop Zone Item Styling (Unchanged) --- */
-.module-item { padding: 15px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; cursor: grab; user-select: none; }
-.module-item:active { cursor: grabbing; }
-.module-item h3 { margin: 0 0 5px 0; font-size: 16px; }
-.module-item p { margin: 0; font-size: 14px; color: #555; }
-#drop-zone.drag-over { background-color: #e0e9ff; border-color: #0056b3; }
-.dropped-item { background-color: #e9ecef; border: 1px solid #adb5bd; position: relative; padding: 15px; margin-bottom: 10px; border-radius: 8px; }
-.dropped-item .delete-btn { position: absolute; top: 50%; transform: translateY(-50%); right: 10px; border: none; background: none; font-size: 24px; line-height: 1; cursor: pointer; color: #888; padding: 5px; }
-.dropped-item .delete-btn:hover { color: #dc3545; }
-
-/* --- ::: NEW & UPDATED STYLES START HERE ::: --- */
-
-/* Container for the build/generate buttons */
-.build-controls {
-    display: flex; /* Aligns buttons side-by-side */
-    gap: 10px; /* Adds space between the buttons */
-    margin-top: auto; /* Pushes the buttons to the bottom */
+    --header-height: 80px;
+    --container-width: 1100px;
+    --border-radius: 8px;
 }
-#build-btn, #generate-btn {
-    flex-grow: 1; /* Makes both buttons share the space equally */
-    padding: 12px 20px;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
+
+/* 2. Global Styles & Resets */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-height);
+}
+
+body {
+    font-family: var(--font-body);
     font-size: 16px;
-    font-weight: bold;
-}
-#build-btn {
-    background-color: #007bff;
-    color: white;
-}
-#build-btn:hover { background-color: #0056b3; }
-#generate-btn {
-    background-color: #28a745; /* Green color for generate */
-    color: white;
-}
-#generate-btn:hover { background-color: #218838; }
-
-/* Style for when buttons are disabled */
-#generate-btn:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: var(--white-color);
 }
 
-/* --- Preview Column & View Toggles (Restored) --- */
-.preview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
-.preview-header h2 { margin: 0; }
-.view-controls { display: flex; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; }
-.view-toggle-btn { padding: 8px 16px; border: none; background-color: #ffffff; cursor: pointer; font-size: 14px; color: #333; }
-.view-toggle-btn:first-child { border-right: 1px solid #ccc; }
-.view-toggle-btn.active { background-color: #007bff; color: white; }
-#preview-wrapper { flex-grow: 1; display: flex; justify-content: center; align-items: flex-start; overflow: auto; }
-iframe { background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px; height: 98%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: width 0.3s ease-in-out; }
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--dark-color);
+}
 
-.hidden { display: none; }
+h1 { font-size: 3rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 1.5rem; }
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* 3. Header & Navigation */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.header.scrolled {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-bottom: 1px solid #eee;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    height: var(--header-height);
+    padding: 0 20px;
+}
+
+.logo-link {
+    display: inline-block; /* Ensures proper alignment and behavior */
+}
+
+.logo-image {
+    max-height: 45px; /* Controls the logo height. Adjust if needed. */
+    width: auto; /* Maintains the aspect ratio */
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    font-family: var(--font-body); /* Switched to the body font */
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+    text-transform: uppercase;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* 4. Section-Specific Styles */
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white-color);
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 900px;
+    padding: 20px;
+}
+
+.hero-headline {
+    color: var(--white-color);
+    font-size: 4rem;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.hero-subheadline {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin: 1.5rem auto 2.5rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #ffca2c;
+    color: var(--dark-color);
+    transform: translateY(-3px);
+}
+
+/* Content Sections (General) */
+.content-section {
+    padding: 80px 20px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-headline {
+    margin-bottom: 1.5rem;
+}
+
+.section-intro {
+    max-width: 750px;
+    margin: 0 auto 3rem auto;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    text-align: left;
+    margin-top: 4rem;
+}
+
+.service-card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.service-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+}
+
+.service-card h3 {
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+/* About Section */
+.about-section {
+    background-color: var(--bg-light);
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-content h3 {
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+}
+
+/* Partners Section (Logo Slider) */
+.partners-section {
+    padding: 60px 20px;
+}
+
+.logo-slider .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-slider img {
+    max-height: 50px;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.logo-slider img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* Testimonials Section */
+.testimonial-section {
+    background-color: #ffd065; /* Updated Testimonial BG Color */
+}
+
+.testimonial-section .section-headline,
+.testimonial-section .section-intro {
+    color: var(--dark-color); /* Updated for light background */
+}
+
+.testimonial-card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.testimonial-text {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #444;
+}
+
+.testimonial-author {
+    margin-top: 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+/* Footer (Contact Section) */
+.footer-section {
+    background-color: #253449; /* Updated Footer Color */
+    color: var(--bg-light);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.footer-section .section-headline {
+    color: var(--white-color);
+}
+
+.footer-section p {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-info {
+    margin: 2rem 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.contact-info a {
+    color: var(--white-color);
+    margin: 0 10px;
+}
+
+.contact-info a:hover {
+    color: var(--primary-color);
+}
+
+.footer-note {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+
+/* 5. Swiper.js Customizations */
+.swiper {
+    width: 100%;
+    padding: 20px 0 50px 0; /* Add padding for pagination */
+}
+
+.testimonial-slider .swiper-pagination-bullet {
+    background-color: rgba(34, 44, 42, 0.5); /* Dark semi-transparent */
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+}
+
+.testimonial-slider .swiper-pagination-bullet-active {
+    background-color: var(--dark-color); /* Dark for high contrast */
+}
+
+
+/* 6. Responsive Media Queries (Mobile-First Approach) */
+
+/* Tablets (min-width: 768px) */
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-headline {
+        font-size: 3rem;
+    }
+}
+
+/* Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+    :root {
+        --header-height: 70px;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.25rem; }
+    
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding-top: 15px;
+    }
+
+    .nav-menu {
+        margin-top: 15px;
+        width: 100%;
+        justify-content: space-around;
+        padding: 10px 0;
+        background-color: var(--bg-light);
+    }
+    
+    html {
+       scroll-padding-top: 120px; /* Adjust for taller mobile nav */
+    }
+
+    .hero {
+        height: 90vh;
+    }
+    
+    .hero-headline {
+        font-size: 2.5rem;
+    }
+
+    .hero-subheadline {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 12px 28px;
+        font-size: 1rem;
+    }
+    
+    .content-section {
+        padding: 60px 15px;
+    }
+    
+    .service-card {
+        padding: 30px;
+    }
+    
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .contact-info span {
+        display: none;
+    }
+}
